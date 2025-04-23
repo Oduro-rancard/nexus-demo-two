@@ -1,0 +1,33 @@
+name: Build and Deploy to Nexus
+ on:
+  push:
+     branches:["master"]
+
+jobs:
+   build:
+       runs-on: self-hosted
+
+   steps:
+       - name: Checkout Code
+         uses: actions/checkout@v3
+
+       - name: Set JAVA_HOME
+         run: |
+           export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+           echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
+
+       - name: Verify Java Version
+         run: java -version
+
+       - name: Build with Maven
+         run: mvn clean package
+
+       - name: Deploy to Nexus
+          env:
+            MAVEN_USER_NAME: ${{ secrets.NEXUS_USER }}
+            MAVEN_USER_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+          run: |
+            mvn deploy \
+            -DaltDeploymentRepository=nexus::default::http://192.168.0.178:8081/repository/maven-releases/ \
+            -Dusername=$MAVEN_USER_NAME \
+            -Dpassword=$MAVEN_USER_PASSWORD
