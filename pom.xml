@@ -5,7 +5,7 @@
   <groupId>com.rancard.demo</groupId>
   <artifactId>nexus-demo</artifactId>
   <packaging>jar</packaging>
-  <version>1.0</version> 
+  <version>1.0.1</version> 
   <name>new-hello-nexus</name>
   <url>http://maven.apache.org</url>
 
