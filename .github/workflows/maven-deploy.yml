@@ -1,5 +1,5 @@
 name: Build and Deploy to Nexus
- on:
+on:
   push:
      branches: ["master"]
 
@@ -7,7 +7,7 @@ jobs:
    build:
        runs-on: self-hosted
 
-   steps:
+       steps:
        - name: Checkout Code
          uses: actions/checkout@v3
 
@@ -23,10 +23,10 @@ jobs:
          run: mvn clean package
 
        - name: Deploy to Nexus
-          env:
+         env:
             MAVEN_USER_NAME: ${{ secrets.NEXUS_USER }}
             MAVEN_USER_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-          run: |
+         run: |
             mvn deploy \
             -DaltDeploymentRepository=nexus::default::http://192.168.0.178:8081/repository/maven-releases/ \
             -Dusername=$MAVEN_USER_NAME \
