@@ -38,7 +38,7 @@
   <distributionManagement>
     <repository>
       <id>nexus</id>
-      <url>http://localhost:8081/repository/maven-releases/</url> <!-- Change this URL based on your Nexus setup -->
+      <url>http://192.168.0.178:8081/repository/maven-releases/</url> <!-- Change this URL based on your Nexus setup -->
     </repository>
   </distributionManagement>
 
